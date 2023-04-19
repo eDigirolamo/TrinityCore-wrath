@@ -1,0 +1,87 @@
+1. /src/server/game/Scripting/ScriptMgr.cpp
+1.1 Agregar:
+     FOREACH_SCRIPT(PlayerScript)->OnMapChanged(player);
+ 
++    FOREACH_SCRIPT(AllMapScript)->OnPlayerEnterAll(map, player);
++
+     SCR_MAP_BGN(WorldMapScript, map, itr, end, entry, IsWorldMap);
+         itr->second->OnPlayerEnter(map, player);
+     SCR_MAP_END;
+
+2. /src/server/game/Scripting/ScriptMgr.cpp
+2.1 Agregar:
+     ASSERT(map);
+     ASSERT(player);
+ 
++    FOREACH_SCRIPT(AllMapScript)->OnPlayerLeaveAll(map, player);
++
+     SCR_MAP_BGN(WorldMapScript, map, itr, end, entry, IsWorldMap);
+         itr->second->OnPlayerLeave(map, player);
+     SCR_MAP_END;
+
+3. /src/server/game/Scripting/ScriptMgr.cpp
+3.1 Agregar:
+ {
+     ASSERT(map);
+ 
++    FOREACH_SCRIPT(AllMapScript)->OnAllUpdate(map, diff);
++
+     SCR_MAP_BGN(WorldMapScript, map, itr, end, entry, IsWorldMap);
+         itr->second->OnUpdate(map, diff);
+     SCR_MAP_END;
+
+4. /src/server/game/Scripting/ScriptMgr.cpp
+4.1 Agregar:
+ }
+ 
+ // Unit
++void ScriptMgr::ModifyHealRecieved(Unit* healer, Unit* target, uint32 &heal)
++{
++    FOREACH_SCRIPT(UnitScript)->ModifyHealRecieved(healer, target, heal);
++}
++
+ void ScriptMgr::OnHeal(Unit* healer, Unit* reciever, uint32& gain)
+ {
+     FOREACH_SCRIPT(UnitScript)->OnHeal(healer, reciever, gain);
+
+5. /src/server/game/Scripting/ScriptMgr.cpp
+5.1 Agregar:
+     FOREACH_SCRIPT(UnitScript)->ModifySpellDamageTaken(target, attacker, damage);
+ }
+ 
++AllMapScript::AllMapScript(const char *name)
++    : ScriptObject(name)
++{
++#if !defined(_MSC_VER) || _MSC_VER >= 1600
++    ScriptRegistry<AllMapScript>::Instance()->AddScript(this);
++#else
++    ScriptRegistry<AllMapScript>::AddScript(this);
++#endif
++}
++
++AllCreatureScript::AllCreatureScript(const char *name)
++    : ScriptObject(name)
++{
++#if !defined(_MSC_VER) || _MSC_VER >= 1600
++    ScriptRegistry<AllCreatureScript>::Instance()->AddScript(this);
++#else
++    ScriptRegistry<AllCreatureScript>::AddScript(this);
++#endif
++}
++
++void ScriptMgr::OnCreatureUpdateAll(Creature *creature, uint32 diff)
++{
++    FOREACH_SCRIPT(AllCreatureScript)->OnAllCreatureUpdate(creature, diff);
++}
++
+ SpellScriptLoader::SpellScriptLoader(char const* name)
+     : ScriptObject(name)
+ {
+
+6.  /src/server/game/Scripting/ScriptMgr.cpp
+6.1 Agregar:
+ template class TC_GAME_API ScriptRegistry<GroupScript>;
+ template class TC_GAME_API ScriptRegistry<UnitScript>;
+ template class TC_GAME_API ScriptRegistry<AccountScript>;
++template class TC_GAME_API ScriptRegistry<AllMapScript>;
++template class TC_GAME_API ScriptRegistry<AllCreatureScript>;

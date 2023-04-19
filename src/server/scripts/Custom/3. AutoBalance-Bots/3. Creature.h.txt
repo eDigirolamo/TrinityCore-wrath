@@ -1,0 +1,20 @@
+1. /src/server/game/Entities/Creature/Creature.h
+1.1 Agregar:          
+	 class bot_pet_ai;
+	 //end npcbot
+ 
+	+#include "CustomData.h"
+	+
+	 class CreatureAI;
+	 class CreatureGroup;
+	 class Group;
+
+2. /src/server/game/Entities/Creature/Creature.h
+2.1 Agregar:
+         void ResetPlayerDamageReq() { m_PlayerDamageReq = GetHealth() / 2; }
+         uint32 m_PlayerDamageReq;
+ 
++        CreatureCustomData CustomData;
++
+         uint32 GetOriginalEntry() const { return m_originalEntry; }
+         void SetOriginalEntry(uint32 entry) { m_originalEntry = entry; }

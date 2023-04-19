@@ -1,0 +1,13 @@
+1. src/server/worldserver/worldserver.conf.dist
+1.1 Agregar:
+####################################################################################################
+###PLAYTIMEREWARD###
+####################
+#
+# PlayedTimeReward.Money is copper so 10000 copper is 1 gold. Interval 3600000 = 1hour
+PlayedTimeReward.Interval = 3600000
+PlayedTimeReward.Money    = 0
+PlayedTimeReward.Honor    = 100
+PlayedTimeReward.Arena    = 100
+#
+####################################################################################################

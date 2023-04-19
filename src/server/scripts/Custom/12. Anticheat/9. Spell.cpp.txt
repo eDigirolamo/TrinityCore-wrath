@@ -1,0 +1,21 @@
+1. src/server/game/Spells/Spell.cpp
+1.1 Agregar:
+#include "World.h"
+#include "WorldPacket.h"
+#include "WorldSession.h"
++#include "AnticheatMgr.h"
+
+extern SpellEffectHandlerFn SpellEffectHandlers[TOTAL_SPELL_EFFECTS];
+
+2. src/server/game/Spells/Spell.cpp
+2.1 Agregar:
+                    m_preGeneratedPath->ShortenPathUntilDist(PositionToVector3(target), objSize); // move back
+                }
++                if (Player* player = m_caster->ToPlayer())
++                {
++                    // To prevent false positives in the Anticheat system
++                    sAnticheatMgr->SetAllowedMovement(player, true);
++                }
+                break;
+            }
+            case SPELL_EFFECT_SKINNING:

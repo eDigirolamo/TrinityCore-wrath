@@ -1,0 +1,9 @@
+1. src/server/scripts/Custom/custom_script_loader.cpp
+1.1 Agregar:
+// The name of this function should match:
+// void Add${NameOfDirectory}Scripts()
++void AddSC_TemplateNPC();
+void AddCustomScripts()
+{
++	AddSC_TemplateNPC();
+}
