@@ -1,9 +1,0 @@
-1. src/server/scripts/Custom/custom_script_loader.cpp
-1.1 Agregar:
-// The name of this function should match:
-// void Add${NameOfDirectory}Scripts()
-+void AddSC_REFORGER_NPC();
-void AddCustomScripts()
-{
-+    AddSC_REFORGER_NPC();
-}
