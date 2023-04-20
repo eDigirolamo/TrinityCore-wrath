@@ -1,0 +1,4 @@
+NPC Bots
+1. Open Git Bash Here
+2. git remote add trickerer https://github.com/trickerer/TrinityCore-3.3.5-with-NPCBots.git
+3. git pull trickerer npcbots_3.3.5
