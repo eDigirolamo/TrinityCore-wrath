@@ -1,4 +1,0 @@
-Eluna Engine
-1. Open Git Bash Here
-2. git remote add ElunaLuaEngine https://github.com/ElunaLuaEngine/ElunaTrinityWotlk.git
-3. git pull ElunaLuaEngine master
