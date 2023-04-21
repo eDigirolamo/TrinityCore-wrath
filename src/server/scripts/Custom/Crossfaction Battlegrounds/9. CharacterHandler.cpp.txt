@@ -1,0 +1,10 @@
+1. src/server/game/Handlers/CharacterHandler.cpp
+1.1 Agregar:
+#include "QueryHolder.h"
+#include "World.h"
+
++ #include "CFBGData.h"
++
+class LoginQueryHolder : public CharacterDatabaseQueryHolder
+{
+    private:
