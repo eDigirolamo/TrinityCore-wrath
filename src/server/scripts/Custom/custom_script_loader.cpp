@@ -21,5 +21,4 @@
 // void Add${NameOfDirectory}Scripts()
 void AddCustomScripts()
 {
-AddSC_REFORGER_NPC
 }
